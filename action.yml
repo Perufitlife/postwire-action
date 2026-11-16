@@ -1,0 +1,39 @@
+name: "PostWire: Post to Social Media"
+description: "Announce a release, a blog post or a changelog on LinkedIn, Bluesky, Mastodon, Threads, Telegram, Discord and more in one step"
+author: "PostWire"
+branding:
+  icon: "send"
+  color: "blue"
+inputs:
+  api_key:
+    description: "Your PostWire API key (store it as a repository secret). Get one free at https://postwire.io"
+    required: true
+  text:
+    description: "The post. Workflow expressions work, for example the release name and link."
+    required: true
+  platforms:
+    description: "Networks to post to, separated by commas (bluesky, linkedin, mastodon...). Leave empty to post to every account you connected that can take this post."
+    required: false
+    default: ""
+  photo_url:
+    description: "Public link to a picture to attach (optional)"
+    required: false
+    default: ""
+  video_url:
+    description: "Public link to a video to attach (optional)"
+    required: false
+    default: ""
+  fail_on_error:
+    description: "Fail the step when nothing was posted. Set to false to only warn."
+    required: false
+    default: "true"
+outputs:
+  posted:
+    description: "Networks the post went out to, separated by commas"
+  url:
+    description: "Link to the first published post"
+  urls:
+    description: "JSON object: network -> link of the published post"
+runs:
+  using: "node24"
+  main: "index.js"

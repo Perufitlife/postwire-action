@@ -1,0 +1,32 @@
+name: test
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      live:
+        description: "Also publish one post with the test account"
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --test test/lib.test.js
+  live:
+    if: ${{ inputs.live }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: post
+        uses: ./
+        with:
+          api_key: ${{ secrets.POSTWIRE_TEST_KEY }}
+          text: "PostWire GitHub Action check, run ${{ github.run_number }}"
+      - run: test -n "${{ steps.post.outputs.posted }}"
