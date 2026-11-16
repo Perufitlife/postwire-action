@@ -1,5 +1,5 @@
 name: "PostWire: Post to Social Media"
-description: "Announce a release, a blog post or a changelog on LinkedIn, Bluesky, Mastodon, Threads, Telegram, Discord and more in one step"
+description: "Post releases, blog posts and changelogs to LinkedIn, Bluesky, Mastodon, Threads, Telegram and more in one step"
 author: "PostWire"
 branding:
   icon: "send"
